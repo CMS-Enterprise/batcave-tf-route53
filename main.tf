@@ -6,9 +6,12 @@ data "aws_route53_zone" "cms_zone" {
 
 # Route53 record for kiali service
 resource "aws_route53_record" "kiali" {
-  count   = var.environment = "dev" ? 0 : 1 
   zone_id = data.aws_route53_zone.cms_zone.id
-  name    = "kiali-${var.cluster_name}.batcave-dev.internal.cms.gov"
+  name    = ( 
+      var.environment == "dev" ? "kiali-${var.cluster_name}.batcave-dev.internal.cms.gov" : (
+          var.environment == "test" ? "kiali.batcave-test.internal.cms.gov" : "kiali.batcave.internal.cms.gov"
+          )
+      )
   type    = "CNAME"
   ttl     = "60"
   records = [var.elb_dns]
