@@ -1,6 +1,6 @@
 # Extract existing data from AWS
 data "aws_route53_zone" "cms_zone" {
-  name         = "batcave.internal.cms.gov"
+  name         = "batcave-dev.internal.cms.gov"
   private_zone = true
 }
 
