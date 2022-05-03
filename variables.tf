@@ -9,6 +9,7 @@ variable "zone_dns" {
 }
 
 variable "apps" {
+  type = list(string)
   default = [
     "kiali.batcave-dev.internal.cms.gov",
     "code.batcave-dev.internal.cms.gov",
