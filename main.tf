@@ -10,6 +10,6 @@ resource "aws_route53_record" "routes" {
   zone_id = data.aws_route53_zone.cms_zone.id
   name    = var.apps[count.index]
   type    = "CNAME"
-  ttl     = "60"
+  ttl     = var.ttl
   records = [var.elb_dns]
 }

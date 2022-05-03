@@ -16,3 +16,7 @@ variable "apps" {
     "grafana.batcave-dev.internal.cms.gov"
   ]
 }
+
+variable "ttl" {
+    default ="60"
+}
