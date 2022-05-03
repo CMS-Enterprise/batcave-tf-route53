@@ -10,12 +10,7 @@ variable "zone_dns" {
 
 variable "apps" {
   type = list(string)
-  default = [
-    "kiali.batcave-dev.internal.cms.gov",
-    "code.batcave-dev.internal.cms.gov",
-    "tracing.batcave-dev.internal.cms.gov",
-    "grafana.batcave-dev.internal.cms.gov"
-  ]
+  default = []
 }
 
 variable "ttl" {
