@@ -4,12 +4,13 @@ data "aws_route53_zone" "cms_zone" {
   private_zone = true
 }
 
-# Route53 record for kiali service
+# Route53 record for services
 resource "aws_route53_record" "routes" {
-  count   = length(var.apps)
-  zone_id = data.aws_route53_zone.cms_zone.id
-  name    = var.apps[count.index]
-  type    = "CNAME"
-  ttl     = var.ttl
-  records = [var.elb_dns]
+  count           = length(var.apps)
+  zone_id         = data.aws_route53_zone.cms_zone.id
+  name            = var.apps[count.index]
+  type            = "CNAME"
+  ttl             = var.ttl
+  records         = [var.elb_dns]
+  allow_overwrite = true
 }
