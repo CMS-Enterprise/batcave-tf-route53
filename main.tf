@@ -1,16 +1,18 @@
 # Extract existing data from AWS
 data "aws_route53_zone" "cms_zone" {
-  name         = var.zone_dns
+  name         = var.hosted_zone_dns
   private_zone = true
 }
 
-# Route53 record for services
-resource "aws_route53_record" "routes" {
-  count           = length(var.apps)
-  zone_id         = data.aws_route53_zone.cms_zone.id
-  name            = var.apps[count.index]
-  type            = "CNAME"
+module "records" {
+  source = "./records"
+
+  # Iterate over the provided map
+  for_each = var.endpoint_subdomain_map
+
+  hosted_zone_id  = data.aws_route53_zone.cms_zone.id
+  hosted_zone_dns = var.hosted_zone_dns
+  endpoint        = each.value.endpoint
+  subdomains      = each.value.subdomains
   ttl             = var.ttl
-  records         = [var.elb_dns]
-  allow_overwrite = true
 }
