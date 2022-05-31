@@ -1,18 +1,13 @@
-variable "elb_dns" {
-  description = "NLB DNS endpoint"
+variable "hosted_zone_dns" {
+  description = "base domain associated with the private hosted zone for this account"
   default     = ""
 }
 
-variable "zone_dns" {
-  description = "wild card dns for each account"
-  default     = ""
-}
-
-variable "apps" {
-  type = list(string)
-  default = []
+variable "endpoint_subdomain_map" {
+  type        = map(any)
+  description = "Map of type: {public:{endpoint: <lb-dns>, subdomains: [\"subdomain1\", \"subdomain2\"]}}"
 }
 
 variable "ttl" {
-    default ="60"
+  default = "60"
 }
