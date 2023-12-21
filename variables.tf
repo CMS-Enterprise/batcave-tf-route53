@@ -1,6 +1,7 @@
 variable "hosted_zone_dns" {
   description = "base domain associated with the private hosted zone for this account"
   default     = ""
+  type        = string
 }
 
 variable "endpoint_subdomain_map" {
@@ -10,4 +11,5 @@ variable "endpoint_subdomain_map" {
 
 variable "ttl" {
   default = "60"
+  type    = string
 }

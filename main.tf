@@ -1,3 +1,13 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 4.61.0"
+    }
+  }
+  required_version = ">= 1.2"
+}
+
 # Extract existing data from AWS
 data "aws_route53_zone" "cms_zone" {
   name         = var.hosted_zone_dns
