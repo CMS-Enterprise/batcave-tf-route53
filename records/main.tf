@@ -1,3 +1,13 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 4.61.0"
+    }
+  }
+  required_version = ">= 1.2"
+}
+
 # Route53 record for services
 resource "aws_route53_record" "routes" {
   for_each        = toset(var.subdomains)
